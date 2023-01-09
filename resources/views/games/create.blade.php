@@ -21,7 +21,7 @@
 
                         <div>
                             <x-input-label for="email" value="{{ __('Price') }}"/>
-                            <x-text-input id="price" name="price" type="number" class="mt-1 block w-full" required/>
+                            <x-text-input id="price" name="price" type="number" class="mt-1 block w-full" step=".01" required/>
                             <x-input-error class="mt-2" :messages="$errors->get('price')"/>
                         </div>
 

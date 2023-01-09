@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use Illuminate\Auth\Access\Events\GateEvaluated;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -13,11 +16,11 @@ class GameController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return View
      */
     public function index()
     {
-        //
+        return view('games/index', ['games' => Game::all()]);
     }
 
     /**
@@ -41,7 +44,7 @@ class GameController extends Controller
     {
         Game::create($request->all());
 
-        return redirect()->route('games.create');
+        return redirect()->route('games.index');
     }
 
     /**
