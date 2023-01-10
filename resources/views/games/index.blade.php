@@ -13,6 +13,9 @@
                         @foreach($games as $game)
                             <tr>
                                 <td>
+                                    <img src="{{ url($game->imagePath) }}">
+                                </td>
+                                <td>
                                     <x-input-label for="name" value="{{ $game->name }}"/>
                                 </td>
                                 <td>

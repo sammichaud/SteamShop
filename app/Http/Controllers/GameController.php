@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
-use Illuminate\Auth\Access\Events\GateEvaluated;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -36,13 +33,20 @@ class GameController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      *
      * @return RedirectResponse
      */
     public function store(Request $request)
     {
-        Game::create($request->all());
+        $game = Game::create($request->all());
+
+        $name = $request->imagePath->getClientOriginalName();
+        $destination = 'images/games/'.$game->id;
+        $request->imagePath->move(public_path($destination), $name);
+
+        $game->imagePath = $destination.'/'.$name;
+        $game->save();
 
         return redirect()->route('games.index');
     }
@@ -50,7 +54,7 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Game $game
+     * @param  \App\Models\Game  $game
      *
      * @return Response
      */
@@ -62,7 +66,7 @@ class GameController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Game $game
+     * @param  \App\Models\Game  $game
      *
      * @return Response
      */
@@ -74,8 +78,8 @@ class GameController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param \App\Models\Game $game
+     * @param  Request  $request
+     * @param  \App\Models\Game  $game
      *
      * @return Response
      */
@@ -87,7 +91,7 @@ class GameController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Game $game
+     * @param  \App\Models\Game  $game
      *
      * @return Response
      */

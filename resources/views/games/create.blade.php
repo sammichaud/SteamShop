@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-xl">
-                    <form method="post" action="{{ route('games.store') }}" class="mt-12 space-y-12">
+                    <form method="post" action="{{ route('games.store') }}" class="mt-12 space-y-12" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
 
@@ -29,6 +29,10 @@
                             <x-input-label for="email" value="{{ __('Description') }}"/>
                             <x-text-input id="description" name="description" type="text" class="mt-1 block w-full"/>
                             <x-input-error class="mt-2" :messages="$errors->get('description')"/>
+                        </div>
+
+                        <div class="col-md-6">
+                            <x-text-input id="imagePath" name="imagePath" type="file" class="mt-1 block w-full" required/>
                         </div>
 
                         <div>
