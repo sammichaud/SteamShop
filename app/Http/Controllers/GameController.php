@@ -52,6 +52,17 @@ class GameController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return View
+     */
+    public function promotion()
+    {
+        $games = Game::all()->where('releaseDate', '<', now())->sortByDesc('releaseDate')->take(5);
+        return view('games/index', ['games' => $games]);
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Game  $game
