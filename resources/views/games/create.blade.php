@@ -32,13 +32,13 @@
                         </div>
 
                         <div class="col-md-6">
-                            <x-text-input id="imagePath" name="imagePath" type="file" class="mt-1 block w-full" required/>
+                            <x-text-input id="image_path" name="image_path" type="file" class="mt-1 block w-full" required/>
                         </div>
 
                         <div>
                             <x-input-label for="email" value="{{ __('Release date') }}"/>
-                            <x-text-input id="releaseDate" name="releaseDate" type="datetime-local" class="mt-1 block w-full datetimepicker" required/>
-                            <x-input-error class="mt-2" :messages="$errors->get('releaseDate')"/>
+                            <x-text-input id="release_date" name="release_date" type="datetime-local" class="mt-1 block w-full datetimepicker" required/>
+                            <x-input-error class="mt-2" :messages="$errors->get('release_date')"/>
                         </div>
 
                         <div class="flex items-center gap-4">

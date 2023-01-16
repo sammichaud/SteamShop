@@ -14,7 +14,7 @@
                             <tr>
                                 <td>
                                     <a href="{{ route('games.show', $game) }}">
-                                        <img src="{{ url($game->imagePath) }}" style="max-width: 200px">
+                                        <img src="{{ url($game->image_path) }}" style="max-width: 200px">
                                     </a>
                                 </td>
                                 <td>
@@ -24,7 +24,7 @@
                                     <x-input-label for="name" value="{{ $game->price }}"/>
                                 </td>
                                 <td>
-                                    <x-input-label for="name" value="{{ $game->releaseDate }}"/>
+                                    <x-input-label for="name" value="{{ $game->release_date }}"/>
                                 </td>
                             </tr>
                         @endforeach

@@ -41,11 +41,11 @@ class GameController extends Controller
     {
         $game = Game::create($request->all());
 
-        $name = $request->imagePath->getClientOriginalName();
+        $name = $request->image_path->getClientOriginalName();
         $destination = 'images/games/'.$game->id;
-        $request->imagePath->move(public_path($destination), $name);
+        $request->image_path->move(public_path($destination), $name);
 
-        $game->imagePath = $destination.'/'.$name;
+        $game->image_path = $destination.'/'.$name;
         $game->save();
 
         return redirect()->route('games.index');
@@ -58,7 +58,7 @@ class GameController extends Controller
      */
     public function promotion()
     {
-        $games = Game::all()->where('releaseDate', '<', now())->sortByDesc('releaseDate')->take(5);
+        $games = Game::all()->where('release_date', '<', now())->sortByDesc('release_date')->take(5);
         return view('games/index', compact('games'));
     }
 

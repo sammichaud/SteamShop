@@ -10,11 +10,11 @@
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div>
                     <a href="{{ route('games.show', $game) }}">
-                        <img src="{{ url($game->imagePath) }}" style="max-width: 200px">
+                        <img src="{{ url($game->image_path) }}" style="max-width: 200px">
                     </a>
                     <x-input-label for="name" value="{{ $game->name }}"/>
                     <x-input-label for="name" value="{{ $game->price }}"/>
-                    <x-input-label for="name" value="{{ $game->releaseDate }}"/>
+                    <x-input-label for="name" value="{{ $game->release_date }}"/>
                     <form method="post" action="{{ route('games.purchase', $game) }}">
                         {{ csrf_field() }}
                         <div class="flex items-center gap-4">
