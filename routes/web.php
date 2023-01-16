@@ -30,5 +30,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/games/create', [GameController::class, 'create'])->name('games.create')->middleware(['auth', 'verified']);
 Route::post('/games/store', [GameController::class, 'store'])->name('games.store')->middleware(['auth', 'verified']);
 Route::get('/games', [GameController::class, 'index'])->name('games.index')->middleware(['auth', 'verified']);
+Route::get('/games/{game}/show', [GameController::class, 'show'])->name('games.show')->middleware(['auth', 'verified']);
+Route::post('/games/{game}/purchase', [GameController::class, 'purchase'])->name('games.purchase')->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

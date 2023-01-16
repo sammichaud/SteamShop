@@ -59,19 +59,28 @@ class GameController extends Controller
     public function promotion()
     {
         $games = Game::all()->where('releaseDate', '<', now())->sortByDesc('releaseDate')->take(5);
-        return view('games/index', ['games' => $games]);
+        return view('games/index', compact('games'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Game  $game
+     * @param  Game  $game
      *
-     * @return Response
+     * @return View
      */
-    public function show(Game $game)
+    public function show(Game $game): View
     {
-        //
+        return view('games/show', compact('game'));
+    }
+
+    /**
+     * @param  Game  $game
+     *
+     * @return void
+     */
+    public function purchase(Game $game)
+    {
     }
 
     /**
