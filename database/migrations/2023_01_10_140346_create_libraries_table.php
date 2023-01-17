@@ -13,7 +13,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('libraries', function (Blueprint $table) {
-            $table->id();
+            $table->primary(['user_id', 'game_id']);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('game_id');
             $table->timestamps();
