@@ -6,6 +6,7 @@ use App\Models\Game;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class GameController extends Controller
@@ -77,10 +78,17 @@ class GameController extends Controller
     /**
      * @param  Game  $game
      *
-     * @return void
+     * @return RedirectResponse
      */
-    public function purchase(Game $game)
+    public function purchase(Game $game): RedirectResponse
     {
+        if ($game->buyByUser(Auth::user())) {
+            return redirect()->route('games.index');
+        }
+        return redirect()->back()->with(
+            'error',
+            'Crédits insuffisants'
+        );
     }
 
     /**
