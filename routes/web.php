@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [GameController::class, 'promotion'])->middleware(['auth', 'verified']);
+Route::get('/', [GameController::class, 'promotion'])->middleware(['auth', 'verified'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
