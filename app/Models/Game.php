@@ -10,7 +10,7 @@ class Game extends Model
 
     function buyByUser(User $user)
     {
-        if (!$user->hasGame($this) && $this->price <= $user->credits) {
+        if ($this->release_date < now() && !$user->hasGame($this) && $this->price <= $user->credits) {
             $user->credits -= $this->price;
             $user->save();
 

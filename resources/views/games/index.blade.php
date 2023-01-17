@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Game') }}
+            {{ __('Games') }}
         </h2>
     </x-slot>
 
@@ -13,8 +13,10 @@
                         @foreach($games as $game)
                             <tr>
                                 <td>
-                                    @if(Auth::user()->hasGame($game))
-                                        <x-input-label for="name" value="Possédé"/>
+                                    @if($game->release_date > now())
+                                        <x-input-label for="name" value="Coming soon"/>
+                                    @elseif(Auth::user()->hasGame($game))
+                                        <x-input-label for="name" value="In library"/>
                                     @endif
                                 </td>
                                 <td>
