@@ -10,10 +10,10 @@ class Game extends Model
 
     function buyByUser(User $user)
     {
-        if ($this->price <= $user->credits) {
+        if (!$user->hasGame($this) && $this->price <= $user->credits) {
             $user->credits -= $this->price;
             $user->save();
-            
+
             Library::create(['user_id' => $user->id, 'game_id' => $this->id]);
 
             return true;

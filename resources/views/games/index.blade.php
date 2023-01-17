@@ -13,6 +13,11 @@
                         @foreach($games as $game)
                             <tr>
                                 <td>
+                                    @if(Auth::user()->hasGame($game))
+                                        <x-input-label for="name" value="Possédé"/>
+                                    @endif
+                                </td>
+                                <td>
                                     <a href="{{ route('games.show', $game) }}">
                                         <img src="{{ url($game->image_path) }}" style="max-width: 200px">
                                     </a>

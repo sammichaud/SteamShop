@@ -15,12 +15,16 @@
                     <x-input-label for="name" value="{{ $game->name }}"/>
                     <x-input-label for="name" value="{{ $game->price }}"/>
                     <x-input-label for="name" value="{{ $game->release_date }}"/>
-                    <form method="post" action="{{ route('games.purchase', $game) }}">
-                        {{ csrf_field() }}
-                        <div class="flex items-center gap-4">
-                            <x-primary-button>Buy</x-primary-button>
-                        </div>
-                    </form>
+                    @if(Auth::user()->hasGame($game))
+                        <x-primary-button disabled>Possédé</x-primary-button>
+                    @else
+                        <form method="post" action="{{ route('games.purchase', $game) }}">
+                            {{ csrf_field() }}
+                            <div class="flex items-center gap-4">
+                                <x-primary-button>Buy</x-primary-button>
+                            </div>
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>

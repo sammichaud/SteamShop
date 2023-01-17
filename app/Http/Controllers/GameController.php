@@ -87,7 +87,7 @@ class GameController extends Controller
         }
         return redirect()->back()->with(
             'error',
-            'Crédits insuffisants'
+            'Achat impossible'
         );
     }
 
