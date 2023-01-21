@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->string('name')->nullable(false);
             $table->float('price');
             $table->string('description');
-            $table->string('imagePath');
-            $table->dateTime('releaseDate');
+            $table->string('image_path');
+            $table->dateTime('release_date');
             $table->timestamps();
         });
     }
