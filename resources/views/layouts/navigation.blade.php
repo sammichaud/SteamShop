@@ -61,6 +61,14 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @elseguest
+            <div class="flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        {{ __('Login') }}
+                    </x-nav-link>
+                </div>
+            </div>
             @endauth
 
             <!-- Hamburger -->
