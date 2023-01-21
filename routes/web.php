@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [GameController::class, 'promotion'])->middleware(['auth', 'verified'])->name('home');
+Route::get('/', [GameController::class, 'promotion'])->name('home');
+Route::resource('games', GameController::class)->only(['index', 'show']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -26,7 +27,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/games/{game}/purchase', [GameController::class, 'purchase'])->name('games.purchase');
-    Route::resource('games', GameController::class)->only(['index', 'create', 'store', 'show']);
+    Route::resource('games', GameController::class)->only(['create', 'store']);
 });
 
 require __DIR__.'/auth.php';

@@ -18,6 +18,7 @@
                 </div>
             </div>
 
+            @auth
             <div class="flex">
                 <!-- Navigation Links -->
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -60,6 +61,7 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @endauth
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
@@ -75,6 +77,7 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+        @auth
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">
@@ -99,5 +102,6 @@
                 </form>
             </div>
         </div>
+        @endauth
     </div>
 </nav>

@@ -15,7 +15,7 @@
                                 <td>
                                     @if($game->release_date > now())
                                         <x-input-label for="name" value="Coming soon"/>
-                                    @elseif(Auth::user()->hasGame($game))
+                                    @elseif(Auth::check() && Auth::user()->hasGame($game))
                                         <x-input-label for="name" value="In library"/>
                                     @endif
                                 </td>
