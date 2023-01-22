@@ -15,19 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [GameController::class, 'promotion'])->name('home');
-Route::resource('games', GameController::class)->only(['index', 'show']);
-
 Route::middleware('auth')->group(function () {
+    Route::post('/games/{game}/purchase', [GameController::class, 'purchase'])->name('games.purchase');
+    Route::resource('games', GameController::class)->only(['create', 'store']);
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-Route::middleware('auth')->group(function () {
-    Route::post('/games/{game}/purchase', [GameController::class, 'purchase'])->name('games.purchase');
-    Route::resource('games', GameController::class)->only(['create', 'store']);
-});
+Route::get('/', [GameController::class, 'promotion'])->name('home');
+Route::resource('games', GameController::class)->only(['index', 'show']);
 
 require __DIR__.'/auth.php';
