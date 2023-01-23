@@ -27,6 +27,10 @@
                             </div>
                         </form>
                     @endif
+
+                    <a href="{{ route('games.promotions.create', $game) }}">
+                        <x-primary-button>Promote</x-primary-button>
+                    </a>
                 </div>
             </div>
         </div>

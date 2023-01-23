@@ -20,4 +20,9 @@ class Game extends Model
         }
         return false;
     }
+
+    function promotions()
+    {
+        return $this->hasMany(Promotion::class);
+    }
 }
