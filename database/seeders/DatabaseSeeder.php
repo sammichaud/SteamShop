@@ -29,82 +29,89 @@ class DatabaseSeeder extends Seeder
         $image_name = 'pacman.png';
         copy(__DIR__.'/'.$image_name, public_path($path = 'images/games/'.$image_name));
         \App\Models\Game::create([
-            'name' => "Pac Man",
-            'price' => 9.95,
-            'description' => "Escape from the maze",
-            'image_path' => $path,
-            'release_date' => now()->subYears(30)
+            'name'         => "Pac Man",
+            'price'        => 9.95,
+            'description'  => "Escape from the maze",
+            'image_path'   => $path,
+            'release_date' => now()->subYears(30),
+            'owner_id'     => $user->id,
         ]);
 
         $image_name = 'Antiriad.jpg';
         copy(__DIR__.'/'.$image_name, public_path($path = 'images/games/'.$image_name));
         \App\Models\Game::create([
-            'name' => "Antiriad",
-            'price' => 14.99,
-            'description' => "The sacred armor",
-            'image_path' => $path,
-            'release_date' => now()->subDays(10)
+            'name'         => "Antiriad",
+            'price'        => 14.99,
+            'description'  => "The sacred armor",
+            'image_path'   => $path,
+            'release_date' => now()->subDays(10),
+            'owner_id'     => $user->id,
         ]);
 
         $image_name = 'greenberet.jpg';
         copy(__DIR__.'/'.$image_name, public_path($path = 'images/games/'.$image_name));
         \App\Models\Game::create([
-            'name' => "Green Beret",
-            'price' => 17.20,
-            'description' => "Save the world",
-            'image_path' => $path,
-            'release_date' => now()->subMonths(2)
+            'name'         => "Green Beret",
+            'price'        => 17.20,
+            'description'  => "Save the world",
+            'image_path'   => $path,
+            'release_date' => now()->subMonths(2),
+            'owner_id'     => $user->id,
         ]);
 
         $image_name = 'ghostngoblins.gif';
         copy(__DIR__.'/'.$image_name, public_path($path = 'images/games/'.$image_name));
         \App\Models\Game::create([
-            'name' => "Ghost'n'Goblins",
-            'price' => 17.20,
-            'description' => "Free the princess",
-            'image_path' => $path,
-            'release_date' => now()->subMonths(1)
+            'name'         => "Ghost'n'Goblins",
+            'price'        => 17.20,
+            'description'  => "Free the princess",
+            'image_path'   => $path,
+            'release_date' => now()->subMonths(1),
+            'owner_id'     => $user->id,
         ]);
 
         $image_name = 'fzero.jpg';
         copy(__DIR__.'/'.$image_name, public_path($path = 'images/games/'.$image_name));
         \App\Models\Game::create([
-            'name' => "F-Zero",
-            'price' => 20.00,
-            'description' => "Drive fast",
-            'image_path' => $path,
-            'release_date' => now()->addMinutes(10)
+            'name'         => "F-Zero",
+            'price'        => 20.00,
+            'description'  => "Drive fast",
+            'image_path'   => $path,
+            'release_date' => now()->addMinutes(10),
+            'owner_id'     => $user->id,
         ]);
 
         $image_name = 'BloodMoney.png';
         copy(__DIR__.'/'.$image_name, public_path($path = 'images/games/'.$image_name));
         \App\Models\Game::create([
-            'name' => "Blood Money",
-            'price' => 35.00,
-            'description' => "Scroll to the end",
-            'image_path' => $path,
-            'release_date' => now()->subMonth(18)
+            'name'         => "Blood Money",
+            'price'        => 35.00,
+            'description'  => "Scroll to the end",
+            'image_path'   => $path,
+            'release_date' => now()->subMonth(18),
+            'owner_id'     => $user->id,
         ]);
 
         $image_name = 'Shadow-of-the-Beast.jpg';
         copy(__DIR__.'/'.$image_name, public_path($path = 'images/games/'.$image_name));
         \App\Models\Game::create([
-            'name' => "Shadow of the Beast",
-            'price' => 29.00,
-            'description' => "Found it?",
-            'image_path' => $path,
-            'release_date' => now()->addDays(30)
+            'name'         => "Shadow of the Beast",
+            'price'        => 29.00,
+            'description'  => "Found it?",
+            'image_path'   => $path,
+            'release_date' => now()->addDays(30),
+            'owner_id'     => $user->id,
         ]);
 
         $image_name = 'DungeonMaster.jpg';
         copy(__DIR__.'/'.$image_name, public_path($path = 'images/games/'.$image_name));
         \App\Models\Game::create([
-            'name' => "Dungeon Master",
-            'price' => 39.90,
-            'description' => "Zo Kath Ra",
-            'image_path' => $path,
-            'release_date' => now()->addDays(1)
+            'name'         => "Dungeon Master",
+            'price'        => 39.90,
+            'description'  => "Zo Kath Ra",
+            'image_path'   => $path,
+            'release_date' => now()->addDays(1),
+            'owner_id'     => $user->id,
         ]);
-
     }
 }
