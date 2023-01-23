@@ -8,6 +8,11 @@ class Game extends Model
 {
     protected $fillable = ['name', 'price', 'description', 'image_path', 'release_date'];
 
+    function owner()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     function buyByUser(User $user)
     {
         if ($this->release_date < now() && !$user->hasGame($this) && $this->getFinalPrice() <= $user->credits) {

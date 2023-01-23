@@ -9,6 +9,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div>
+                    @if(Auth::user() == $game->owner)
+                        <a href="{{ route('games.promotions.create', $game) }}">
+                            <x-primary-button>Promote</x-primary-button>
+                        </a>
+                    @endif
                     <a href="{{ route('games.show', $game) }}">
                         <img src="{{ url($game->image_path) }}" style="max-width: 200px">
                     </a>
@@ -35,10 +40,6 @@
                             </div>
                         </form>
                     @endif
-
-                    <a href="{{ route('games.promotions.create', $game) }}">
-                        <x-primary-button>Promote</x-primary-button>
-                    </a>
                 </div>
             </div>
         </div>
