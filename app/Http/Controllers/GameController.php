@@ -40,7 +40,7 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        $game = Game::create($request->all());
+        $game = Auth::user()->owners()->create($request->all());
 
         $name = $request->image_path->getClientOriginalName();
         $destination = 'images/games/'.$game->id;
