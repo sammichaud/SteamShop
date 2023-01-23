@@ -21,6 +21,19 @@ class Game extends Model
         return false;
     }
 
+    function getFinalPrice()
+    {
+        $price = $this->price;
+
+        foreach ($this->promotions as $promotion) {
+            if ($promotion->start_date < now() && $promotion->end_date > now() && $promotion->price < $price) {
+                $price = $promotion->price;
+            }
+        }
+
+        return $price;
+    }
+
     function promotions()
     {
         return $this->hasMany(Promotion::class);
