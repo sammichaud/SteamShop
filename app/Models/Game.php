@@ -3,10 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
 
 class Game extends Model
 {
     protected $fillable = ['name', 'price', 'description', 'image_path', 'release_date'];
+
+    function addImage(UploadedFile $image)
+    {
+        $name = $image->getClientOriginalName();
+        $destination = 'images/games/'.$this->id;
+        $image->move(public_path($destination), $name);
+
+        $this->image_path = $destination.'/'.$name;
+    }
 
     function buyByUser(User $user)
     {

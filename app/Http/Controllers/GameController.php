@@ -42,11 +42,7 @@ class GameController extends Controller
     {
         $game = Game::create($request->all());
 
-        $name = $request->image_path->getClientOriginalName();
-        $destination = 'images/games/'.$game->id;
-        $request->image_path->move(public_path($destination), $name);
-
-        $game->image_path = $destination.'/'.$name;
+        $game->addImage($request->image_path);
         $game->save();
 
         return redirect()->route('games.index');
