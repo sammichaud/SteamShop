@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class GameController extends Controller
@@ -34,14 +35,13 @@ class GameController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param Request $request
      *
      * @return RedirectResponse
      */
     public function store(Request $request)
     {
-        $game = Game::create($request->all());
-
+        $game = new Game($request->all());
         $game->addImage($request->image_path);
         $game->save();
 
@@ -62,17 +62,19 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Game  $game
-     *
-     * @return View
+     * @param Game $game
+     * @param Request $request
      */
-    public function show(Game $game): View
+    public function show(Game $game, Request $request)
     {
+        if ($request->prefers(['text', 'image']) == 'image') {
+            return redirect(Storage::disk('s3')->temporaryUrl($game->image_path, now()->addMinutes()));
+        }
         return view('games/show', compact('game'));
     }
 
     /**
-     * @param  Game  $game
+     * @param Game $game
      *
      * @return RedirectResponse
      */
@@ -90,7 +92,7 @@ class GameController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Game  $game
+     * @param Game $game
      *
      * @return Response
      */
@@ -102,8 +104,8 @@ class GameController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  \App\Models\Game  $game
+     * @param Request $request
+     * @param Game $game
      *
      * @return Response
      */
@@ -115,7 +117,7 @@ class GameController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Game  $game
+     * @param Game $game
      *
      * @return Response
      */
