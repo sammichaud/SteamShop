@@ -9,9 +9,20 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div>
+                    @if(Auth::user() == $game->owner)
+                        <a href="{{ route('games.promotions.create', $game) }}">
+                            <x-primary-button>Promote</x-primary-button>
+                        </a>
+                    @endif
                     <img src="{{ route('games.show', $game) }}" style="max-width: 200px">
                     <x-input-label for="name" value="{{ $game->name }}"/>
-                    <x-input-label for="name" value="{{ $game->price }}"/>
+                    @if($game->getFinalPrice() < $game->price)
+                        <strike>
+                            <x-input-label for="name" value="{{ $game->price }}"/>
+                        </strike>
+                    @endif
+                    <x-input-label for="name" value="{{ $game->getFinalPrice() }}"/>
+
                     <x-input-label for="name" value="{{ $game->release_date }}"/>
                     @if($game->release_date > now())
                         <x-primary-button disabled>Coming soon</x-primary-button>

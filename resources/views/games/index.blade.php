@@ -28,7 +28,12 @@
                                     <x-input-label for="name" value="{{ $game->name }}"/>
                                 </td>
                                 <td>
-                                    <x-input-label for="name" value="{{ $game->price }}"/>
+                                    @if($game->getFinalPrice() < $game->price)
+                                        <strike>
+                                            <x-input-label for="name" value="{{ $game->price }}"/>
+                                        </strike>
+                                    @endif
+                                    <x-input-label for="name" value="{{ $game->getFinalPrice() }}"/>
                                 </td>
                                 <td>
                                     <x-input-label for="name" value="{{ $game->release_date }}"/>

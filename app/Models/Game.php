@@ -4,11 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 
 class Game extends Model
 {
     protected $fillable = ['name', 'price', 'description', 'image_path', 'release_date'];
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function addImage(UploadedFile $image)
     {
@@ -17,8 +21,8 @@ class Game extends Model
 
     public function buyByUser(User $user)
     {
-        if ($this->release_date < now() && !$user->hasGame($this) && $this->price <= $user->credits) {
-            $user->credits -= $this->price;
+        if ($this->release_date < now() && !$user->hasGame($this) && $this->getFinalPrice() <= $user->credits) {
+            $user->credits -= $this->getFinalPrice();
             $user->save();
 
             Library::create(['user_id' => $user->id, 'game_id' => $this->id]);
@@ -26,5 +30,23 @@ class Game extends Model
             return true;
         }
         return false;
+    }
+
+    function getFinalPrice()
+    {
+        $price = $this->price;
+
+        foreach ($this->promotions as $promotion) {
+            if ($promotion->start_date < now() && $promotion->end_date > now() && $promotion->price < $price) {
+                $price = $promotion->price;
+            }
+        }
+
+        return $price;
+    }
+
+    function promotions()
+    {
+        return $this->hasMany(Promotion::class);
     }
 }

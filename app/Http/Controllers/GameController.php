@@ -42,6 +42,7 @@ class GameController extends Controller
     public function store(Request $request)
     {
         $game = new Game($request->all());
+        $game->owner_id = Auth::user()->id;
         $game->addImage($request->image_path);
         $game->save();
 

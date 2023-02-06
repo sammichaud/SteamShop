@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Game::class, 'libraries');
     }
+
+    function owners()
+    {
+        return $this->hasMany(Game::class, 'owner_id');
+    }
 }
