@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use Aws\S3\PostObjectV4;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
+use Aws\S3\S3Client;
 
 class GameController extends Controller
 {
@@ -29,7 +32,33 @@ class GameController extends Controller
      **/
     public function create()
     {
-        return view('games/create');
+        $client = new S3Client([
+            'version' => 'latest',
+            'region' => env('AWS_DEFAULT_REGION'),
+        ]);
+        $bucket = env('AWS_BUCKET');
+        $key = "images/games/" . Str::random(40);
+
+        $formInputs = ['acl' => 'private', 'key' => $key];
+        
+        $options = [
+            ['acl' => 'private'],
+            ['bucket' => $bucket],
+            ['starts-with', '$key', $key],
+        ];
+
+        $postObject = new PostObjectV4(
+            $client,
+            $bucket,
+            $formInputs,
+            $options,
+            '+1 hours'
+        );
+
+        $formAttributes = $postObject->getFormAttributes();
+        $formInputs = $postObject->getFormInputs();
+
+        return view('games/create', compact('formAttributes', 'formInputs'));
     }
 
     /**
