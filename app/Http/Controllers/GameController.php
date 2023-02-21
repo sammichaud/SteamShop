@@ -40,7 +40,7 @@ class GameController extends Controller
         $key = "images/games/" . Str::random(40);
 
         $formInputs = ['acl' => 'private', 'key' => $key];
-        
+
         $options = [
             ['acl' => 'private'],
             ['bucket' => $bucket],
@@ -70,11 +70,7 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        $game = new Game($request->all());
-        $game->owner_id = Auth::user()->id;
-        $game->addImage($request->image_path);
-        $game->save();
-
+        Auth::user()->owners()->create($request->all());
         return redirect()->route('games.index');
     }
 
