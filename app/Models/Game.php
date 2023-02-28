@@ -22,10 +22,10 @@ class Game extends Model
     public function buyByUser(User $user)
     {
         if ($this->release_date < now() && !$user->hasGame($this) && $this->getFinalPrice() <= $user->credits) {
+            Library::create(['user_id' => $user->id, 'game_id' => $this->id]);
+
             $user->credits -= $this->getFinalPrice();
             $user->save();
-
-            Library::create(['user_id' => $user->id, 'game_id' => $this->id]);
 
             return true;
         }
