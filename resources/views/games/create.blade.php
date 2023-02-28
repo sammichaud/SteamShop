@@ -73,7 +73,6 @@
             method: "{{ $formAttributes['method'] }}",
             credentials: "same-origin",
             body: formData,
-            mode: 'no-cors'
         })
 
         if (response.ok) {
